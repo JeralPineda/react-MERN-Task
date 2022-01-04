@@ -375,6 +375,7 @@ aside {
 .campo-form input[type='email'],
 .campo-form input[type='text'] {
    border: 1px solid #e1e1e1;
+   border-radius: 0.5rem;
    padding: 1rem;
    flex: 1;
 }

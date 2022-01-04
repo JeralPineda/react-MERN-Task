@@ -33,7 +33,7 @@ const Login = () => {
 
             <form onSubmit={handleSubmit}>
                <div className="campo-form">
-                  <label htmlFor="email">Email</label>
+                  {/* <label htmlFor="email">Email</label> */}
                   <input
                      //
                      type="email"
@@ -46,7 +46,7 @@ const Login = () => {
                </div>
 
                <div className="campo-form">
-                  <label htmlFor="email">Password</label>
+                  {/* <label htmlFor="email">Password</label> */}
                   <input
                      //
                      type="password"
@@ -62,6 +62,26 @@ const Login = () => {
                   <button type="submit" className="btn btn-primario btn-block">
                      Iniciar Sesión
                   </button>
+               </div>
+
+               <div className="row-btn">
+                  <div className="google-btn">
+                     <div className="google-icon-wrapper">
+                        <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
+                     </div>
+                     <p className="btn-text">
+                        <b>Google</b>
+                     </p>
+                  </div>
+
+                  <div className="google-btn">
+                     <div className="google-icon-wrapper">
+                        <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Font_Awesome_5_brands_github.svg/640px-Font_Awesome_5_brands_github.svg.png" alt="google button" />
+                     </div>
+                     <p className="btn-text">
+                        <b>GitHub</b>
+                     </p>
+                  </div>
                </div>
             </form>
 

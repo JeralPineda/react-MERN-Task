@@ -90,6 +90,58 @@ a {
    background-color: transparent;
 }
 
+/* boton google */
+.row-btn {
+   display: flex;
+   justify-content: space-between;
+}
+
+.google-btn {
+   cursor: pointer;
+   margin-top: 5px;
+   margin-right: 4px;
+   width: 100%;
+   height: 44px;
+   background-color: var(--gris2);
+   border-radius: 0.5rem;
+   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+
+   transition: box-shadow 0.3s ease;
+}
+
+.google-btn:hover {
+   box-shadow: 0 0 6px var(--gris3);
+}
+
+.google-btn:active {
+   background: var(--gris1);
+}
+
+.google-icon-wrapper {
+   position: absolute;
+   margin-top: 1px;
+   margin-left: 1px;
+   width: 42px;
+   height: 42px;
+   border-radius: 0.5rem;
+   background-color: var(--blanco);
+}
+
+.google-icon {
+   position: absolute;
+   margin-top: 11px;
+   margin-left: 11px;
+   width: 18px;
+   height: 18px;
+}
+
+.btn-text {
+   text-align: center;
+   color: var(--blanco);
+   font-size: 14px;
+   letter-spacing: 0.2px;
+}
+
 @media (min-width: 768px) {
    .contenedor-app {
       display: flex;
@@ -102,6 +154,17 @@ a {
    }
    .seccion-principal {
       flex: 1;
+   }
+}
+
+@media (max-width: 400px) {
+   .row-btn {
+      display: block;
+   }
+
+   .btn-text {
+      float: right;
+      margin: 11px 100px 0 0;
    }
 }
 

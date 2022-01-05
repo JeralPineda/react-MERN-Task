@@ -5,7 +5,7 @@ import proyectoContext from '../../context/projects/projectContext';
 const NewProject = () => {
    // Obtener el state del formulario
    const proyectosContext = useContext(proyectoContext);
-   const { formulario } = proyectosContext;
+   const { formulario, mostrarFormulario } = proyectosContext;
 
    // State del proyecto
    const [proyecto, setProyecto] = useState({
@@ -32,9 +32,18 @@ const NewProject = () => {
       // Limpiar el formulario
    };
 
+   // Mostrar el formulario
+   const handleClickForm = () => {
+      mostrarFormulario();
+   };
+
    return (
       <>
-         <button type="button" className="btn btn-block btn-primario">
+         <button
+            //
+            type="button"
+            className="btn btn-block btn-primario"
+            onClick={handleClickForm}>
             Nuevo Proyecto
          </button>
 

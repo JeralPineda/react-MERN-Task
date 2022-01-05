@@ -2,24 +2,26 @@ import { useReducer } from 'react';
 
 import proyectoContext from './projectContext';
 import proyectoReducer from './projectReducer';
-import { FORMULARIO_PROYECTO } from '../../types';
+import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS } from '../../types';
 
 const ProyectoState = ({ children }) => {
+   const proyectos = [
+      {
+         id: 1,
+         nombre: 'Tienda Virtual',
+      },
+      {
+         id: 2,
+         nombre: 'Intranet',
+      },
+      {
+         id: 3,
+         nombre: 'Diseño de sitio web',
+      },
+   ];
+
    const initialState = {
-      proyectos: [
-         {
-            id: 1,
-            nombre: 'Tienda Virtual',
-         },
-         {
-            id: 2,
-            nombre: 'Intranet',
-         },
-         {
-            id: 3,
-            nombre: 'Diseño de sitio web',
-         },
-      ],
+      proyectos: [],
       formulario: false,
    };
 
@@ -33,6 +35,14 @@ const ProyectoState = ({ children }) => {
       });
    };
 
+   // Obtener los proyectos
+   const obtenerProyectos = () => {
+      dispatch({
+         type: OBTENER_PROYECTOS,
+         payload: proyectos,
+      });
+   };
+
    return (
       <proyectoContext.Provider
          //
@@ -40,6 +50,7 @@ const ProyectoState = ({ children }) => {
             proyectos: state.proyectos,
             formulario: state.formulario,
             mostrarFormulario,
+            obtenerProyectos,
          }}>
          {children}
       </proyectoContext.Provider>

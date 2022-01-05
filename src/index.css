@@ -129,14 +129,15 @@ a {
 
 .google-icon {
    position: absolute;
-   margin-top: 11px;
-   margin-left: 11px;
-   width: 18px;
-   height: 18px;
+   margin-top: 9px;
+   margin-left: 9px;
+   width: 25px;
+   height: 25px;
 }
 
 .btn-text {
    text-align: center;
+   margin-left: 10px;
    color: var(--blanco);
    font-size: 14px;
    letter-spacing: 0.2px;

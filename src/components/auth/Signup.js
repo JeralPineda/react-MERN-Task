@@ -88,7 +88,7 @@ const Signup = () => {
 
                <div className="campo-form">
                   <button type="submit" className="btn btn-primario btn-block">
-                     Iniciar Sesión
+                     Crear Cuenta
                   </button>
                </div>
 
@@ -98,7 +98,7 @@ const Signup = () => {
                         <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
                      </div>
                      <p className="btn-text">
-                        <b>Google</b>
+                        <b>Crear con Google</b>
                      </p>
                   </div>
 
@@ -107,7 +107,7 @@ const Signup = () => {
                         <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Font_Awesome_5_brands_github.svg/640px-Font_Awesome_5_brands_github.svg.png" alt="google button" />
                      </div>
                      <p className="btn-text">
-                        <b>GitHub</b>
+                        <b>Crear con GitHub</b>
                      </p>
                   </div>
                </div>

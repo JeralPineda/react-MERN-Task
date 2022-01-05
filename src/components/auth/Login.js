@@ -70,7 +70,7 @@ const Login = () => {
                         <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
                      </div>
                      <p className="btn-text">
-                        <b>Google</b>
+                        <b>Ingresar con Google</b>
                      </p>
                   </div>
 
@@ -79,7 +79,7 @@ const Login = () => {
                         <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Font_Awesome_5_brands_github.svg/640px-Font_Awesome_5_brands_github.svg.png" alt="google button" />
                      </div>
                      <p className="btn-text">
-                        <b>GitHub</b>
+                        <b>Ingresar con GitHub</b>
                      </p>
                   </div>
                </div>

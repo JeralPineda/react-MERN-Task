@@ -1,6 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+
+import proyectoContext from '../../context/projects/projectContext';
 
 const NewProject = () => {
+   // Obtener el state del formulario
+   const proyectosContext = useContext(proyectoContext);
+   const { formulario } = proyectosContext;
+
    // State del proyecto
    const [proyecto, setProyecto] = useState({
       nombre: '',
@@ -32,24 +38,26 @@ const NewProject = () => {
             Nuevo Proyecto
          </button>
 
-         <form
-            //
-            className="formulario-nuevo-proyecto"
-            onSubmit={handleSubmit}>
-            <input
+         {formulario ? (
+            <form
                //
-               type="text"
-               className="input-text"
-               placeholder="Nombre Proyecto"
-               name="nombre"
-               value={nombre}
-               onChange={handleChange}
-            />
+               className="formulario-nuevo-proyecto"
+               onSubmit={handleSubmit}>
+               <input
+                  //
+                  type="text"
+                  className="input-text"
+                  placeholder="Nombre Proyecto"
+                  name="nombre"
+                  value={nombre}
+                  onChange={handleChange}
+               />
 
-            <button type="submit" className="btn btn-block btn-primario">
-               Agregar Proyecto
-            </button>
-         </form>
+               <button type="submit" className="btn btn-block btn-primario">
+                  Agregar Proyecto
+               </button>
+            </form>
+         ) : null}
       </>
    );
 };

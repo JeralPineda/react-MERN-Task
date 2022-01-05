@@ -1,7 +1,7 @@
-const Task = () => {
+const Task = ({ tarea }) => {
    return (
       <div>
-         <h1>Tarea</h1>
+         <h1>{tarea.nombre}</h1>
       </div>
    );
 };

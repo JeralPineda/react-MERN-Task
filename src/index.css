@@ -219,7 +219,7 @@ aside {
 .app-header {
    display: flex;
    justify-content: space-between;
-   background-color: var(--gris2);
+   background-color: var(--negro2);
    padding: 4rem;
 }
 .nombre-usuario {

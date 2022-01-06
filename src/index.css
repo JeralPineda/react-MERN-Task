@@ -1,9 +1,10 @@
 :root {
    --blanco: #fafafa;
+   --blanco2: #ddd;
    --blanco4: #ccc;
    --gris1: #edf2f6;
-   --gris2: #2f3848;
-   --gris3: #1a202d;
+   --gris2: #444;
+   --gris3: #2a2a2a;
    --negro: #000000;
    --negro2: #111;
    --negro3: #222;
@@ -25,7 +26,7 @@ html {
 }
 body {
    min-height: 100%;
-   background-color: var(--gris1);
+   background-color: var(--negro);
    font-size: 16px;
    font-size: 1.6rem;
    font-family: var(--textFont);
@@ -156,7 +157,7 @@ a {
    }
 
    aside {
-      background-color: var(--blanco);
+      background-color: var(--negro5);
       flex: 0 0 300px;
    }
    .seccion-principal {
@@ -178,6 +179,7 @@ a {
 /* BARRA LATERAL */
 aside {
    padding: 3rem;
+   background-color: var(--negro5);
 }
 
 .formulario-nuevo-proyecto {
@@ -185,23 +187,34 @@ aside {
 }
 .formulario-nuevo-proyecto .input-text {
    border-bottom: 1px solid var(--gris2);
-   border-radius: 0;
-   background-color: var(--gris1);
+   border-radius: 0.5rem;
+   color: var(--blanco);
+   background-color: var(--negro);
 }
-.formulario-nuevo-proyecto .input-text::placeholder {
-   color: var(--gris2);
+
+.formulario-nuevo-proyecto .input-text:focus {
+   outline: none !important;
+   border: 1px solid var(--gris2);
 }
+
+/* .formulario-nuevo-proyecto .input-text::placeholder {
+   color: var(--blanco);
+} */
 .proyectos {
    margin-top: 10rem;
 }
 .listado-proyectos li {
    margin-bottom: 2rem;
 }
-.listado-proyectos li a {
+.listado-proyectos li button {
    font-size: 1.4rem;
-   color: var(--gris2);
+   color: var(--blanco);
    line-height: 1.5;
    font-weight: 300;
+   transition: color 0.2s ease-in-out;
+}
+.listado-proyectos li button:hover {
+   color: var(--blanco4);
 }
 .app-header {
    display: flex;

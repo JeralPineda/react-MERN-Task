@@ -88,7 +88,7 @@ a {
    width: 100%;
 }
 .btn-submit:hover {
-   background-color: var(--gris2);
+   background-color: var(--gris3);
 }
 .btn-blank {
    margin: 0;
@@ -219,7 +219,7 @@ aside {
 .app-header {
    display: flex;
    justify-content: space-between;
-   background-color: var(--negro2);
+   background-color: var(--negro4);
    padding: 4rem;
 }
 .nombre-usuario {
@@ -240,7 +240,7 @@ aside {
 
 /** Formulario crear y editar tareas **/
 .formulario {
-   background-color: var(--gris3);
+   background-color: var(--negro2);
    padding: 4rem;
 }
 .formulario form {
@@ -256,10 +256,17 @@ aside {
 }
 .input-text {
    padding: 1rem;
+   background-color: var(--negro);
+   color: var(--blanco);
    border: none;
    border-radius: 0.5rem;
+   border: 1px solid var(--negro);
    flex: 1;
    width: 100%;
+}
+.input-text:focus {
+   outline: none !important;
+   border: 1px solid var(--gris3);
 }
 
 /** TAREAS LISTADO **/

@@ -1,6 +1,6 @@
 const Task = ({ tarea }) => {
    return (
-      <li className="tarea sombra">
+      <li className="tarea">
          <p>{tarea.nombre}</p>
 
          <div className="estado">
@@ -32,7 +32,7 @@ const Task = ({ tarea }) => {
             <button
                //
                type="button"
-               className="btn btn-secundario">
+               className="btn btn-eliminar">
                Eliminar
             </button>
          </div>

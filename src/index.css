@@ -282,16 +282,18 @@ aside {
 .tarea {
    display: flex;
    justify-content: space-between;
-   background-color: var(--blanco);
+   background-color: var(--negro5);
+   color: var(--blanco);
+   border: 1px solid var(--negro2);
    padding: 0.5rem 2rem;
    align-items: center;
    margin-bottom: 1rem;
    border-radius: 0.5rem;
 }
 .sombra {
-   -webkit-box-shadow: 0px 4px 10px -3px rgba(117, 117, 117, 1);
-   -moz-box-shadow: 0px 4px 10px -3px rgba(117, 117, 117, 1);
-   box-shadow: 0px 4px 10px -3px rgba(117, 117, 117, 1);
+   -webkit-box-shadow: 0px 4px 10px -3px rgba(22, 22, 22, 0.712);
+   -moz-box-shadow: 0px 4px 10px -3px rgba(22, 22, 22, 0.712);
+   box-shadow: 0px 4px 10px -3px rgba(22, 22, 22, 0.712);
 }
 .sombra-dark {
    -webkit-box-shadow: 0px 6px 11px -8px rgba(0, 0, 0, 0.9);
@@ -309,7 +311,7 @@ aside {
 .tarea .btn {
    padding: 0.8rem;
    font-size: 1.4rem;
-   border-radius: 0;
+   border-radius: 0.5rem;
    margin: 0;
 }
 
@@ -337,11 +339,11 @@ aside {
 .completo,
 .correcto {
    background-color: rgba(154, 252, 154, 0.3);
-   color: var(--gris3);
+   color: var(--negro);
 }
 .incompleto {
    background-color: rgba(255, 178, 178, 0.4);
-   color: var(--gris3);
+   color: var(--negro);
 }
 .error {
    max-width: 600px;
@@ -456,5 +458,6 @@ aside {
 }
 
 .btn-eliminar {
-   background-color: var(--blanco);
+   background-color: rgba(241, 9, 9, 0.37);
+   color: var(--blanco);
 }

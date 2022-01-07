@@ -8,36 +8,43 @@ const TareaState = ({ children }) => {
    const initialState = {
       tareas: [
          {
+            id: 1,
             nombre: 'Elegir Plataforma',
             estado: true,
             proyectoId: 1,
          },
          {
+            id: 2,
             nombre: 'Elegir Colores',
             estado: false,
             proyectoId: 2,
          },
          {
+            id: 3,
             nombre: 'Elegir Hosting',
             estado: false,
             proyectoId: 3,
          },
          {
+            id: 4,
             nombre: 'Elegir Plataforma',
             estado: true,
             proyectoId: 1,
          },
          {
+            id: 5,
             nombre: 'Elegir Colores',
             estado: false,
             proyectoId: 2,
          },
          {
+            id: 6,
             nombre: 'Elegir Hosting',
             estado: false,
             proyectoId: 3,
          },
       ],
+      tareasproyecto: null,
    };
 
    // Crear dispatch y state
@@ -58,6 +65,7 @@ const TareaState = ({ children }) => {
          //
          value={{
             tareas: state.tareas,
+            tareasproyecto: state.tareasproyecto,
             obtenerTareas,
          }}>
          {children}

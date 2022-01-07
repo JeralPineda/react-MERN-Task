@@ -4,17 +4,20 @@ import Signup from './components/auth/Signup';
 import Projects from './components/projects/Projects';
 
 import ProyectoState from './context/projects/projectState';
+import TareaState from './context/tasks/tareaState';
 
 function App() {
    return (
       <ProyectoState>
-         <Router>
-            <Routes>
-               <Route path="/" element={<Login />} />
-               <Route path="/nueva-cuenta" element={<Signup />} />
-               <Route path="/proyectos" element={<Projects />} />
-            </Routes>
-         </Router>
+         <TareaState>
+            <Router>
+               <Routes>
+                  <Route path="/" element={<Login />} />
+                  <Route path="/nueva-cuenta" element={<Signup />} />
+                  <Route path="/proyectos" element={<Projects />} />
+               </Routes>
+            </Router>
+         </TareaState>
       </ProyectoState>
    );
 }

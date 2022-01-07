@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import proyectoContext from './projectContext';
 import proyectoReducer from './projectReducer';
-import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS, VALIDAR_FORMULARIO } from '../../types';
+import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS, VALIDAR_FORMULARIO, PROYECTO_ACTUAL } from '../../types';
 
 const ProyectoState = ({ children }) => {
    const proyectos = [
@@ -25,6 +25,7 @@ const ProyectoState = ({ children }) => {
       proyectos: [],
       formulario: false,
       errorformulario: false,
+      proyecto: null,
    };
 
    // Dispatch para ejecutar las acciones
@@ -63,6 +64,14 @@ const ProyectoState = ({ children }) => {
       });
    };
 
+   // Selecciona el proyecto que el usuario dio click
+   const proyectoActual = (proyectoId) => {
+      dispatch({
+         type: PROYECTO_ACTUAL,
+         payload: proyectoId,
+      });
+   };
+
    return (
       <proyectoContext.Provider
          //
@@ -70,10 +79,12 @@ const ProyectoState = ({ children }) => {
             proyectos: state.proyectos,
             formulario: state.formulario,
             errorformulario: state.errorformulario,
+            proyecto: state.proyecto,
             mostrarFormulario,
             obtenerProyectos,
             agregarProyecto,
             mostrarErrorProyecto,
+            proyectoActual,
          }}>
          {children}
       </proyectoContext.Provider>

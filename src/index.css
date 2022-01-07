@@ -49,6 +49,9 @@ h1 {
 h2 {
    font-size: 2.4rem;
 }
+p {
+   color: var(--blanco);
+}
 ul {
    list-style: none;
    padding: 0;

@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import proyectoContext from './projectContext';
 import proyectoReducer from './projectReducer';
@@ -43,6 +44,17 @@ const ProyectoState = ({ children }) => {
       });
    };
 
+   // Agregar nuevo proyecto
+   const agregarProyecto = (proyecto) => {
+      proyecto.id = uuidv4();
+
+      // Insertar el proyecto en el state
+      dispatch({
+         type: 'AGREGAR_PROYECTO',
+         payload: proyecto,
+      });
+   };
+
    return (
       <proyectoContext.Provider
          //
@@ -51,6 +63,7 @@ const ProyectoState = ({ children }) => {
             formulario: state.formulario,
             mostrarFormulario,
             obtenerProyectos,
+            agregarProyecto,
          }}>
          {children}
       </proyectoContext.Provider>

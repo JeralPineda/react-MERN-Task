@@ -1,6 +1,19 @@
+import { useContext } from 'react';
+
 import Task from './Task';
+import proyectoContext from '../../context/projects/projectContext';
 
 const ListTasks = () => {
+   // Obtener el state de proyectos
+   const proyectosContext = useContext(proyectoContext);
+   const { proyecto } = proyectosContext;
+
+   // Si no hay proyecto seleccionado
+   if (!proyecto) return <h2>Selecciona un Proyecto</h2>;
+
+   // Extrayendo el proyecto seleccionado
+   const [proyectoSelect] = proyecto;
+
    const tareas = [
       {
          nombre: 'Elegir Plataforma',
@@ -22,7 +35,7 @@ const ListTasks = () => {
 
    return (
       <>
-         <h2>Proyecto: Tienda</h2>
+         <h2>Proyecto: {proyectoSelect.nombre}</h2>
 
          <ul className="listado-tareas">
             {tareas.length === 0 ? (

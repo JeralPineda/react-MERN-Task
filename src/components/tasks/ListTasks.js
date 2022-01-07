@@ -14,24 +14,7 @@ const ListTasks = () => {
    // Extrayendo el proyecto seleccionado
    const [proyectoSelect] = proyecto;
 
-   const tareas = [
-      {
-         nombre: 'Elegir Plataforma',
-         estado: true,
-      },
-      {
-         nombre: 'Elegir Colores',
-         estado: false,
-      },
-      {
-         nombre: 'Elegir Hosting',
-         estado: false,
-      },
-      {
-         nombre: 'Elegir Plataformas de pago',
-         estado: true,
-      },
-   ];
+   const tareas = [];
 
    const handleClickEliminar = () => {
       eliminarProyecto(proyectoSelect.id);
@@ -43,7 +26,9 @@ const ListTasks = () => {
 
          <ul className="listado-tareas">
             {tareas.length === 0 ? (
-               <p className="tarea">No hay tareas</p>
+               <li className="tarea">
+                  <p>No hay tareas</p>
+               </li>
             ) : (
                tareas.map((tarea) => (
                   <Task

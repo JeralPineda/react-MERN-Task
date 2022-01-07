@@ -4,7 +4,38 @@ import TareaReducer from './tareaReducer';
 
 const TareaState = ({ children }) => {
    const initialState = {
-      tareas: [],
+      tareas: [
+         {
+            nombre: 'Elegir Plataforma',
+            estado: true,
+            proyectoId: 1,
+         },
+         {
+            nombre: 'Elegir Colores',
+            estado: false,
+            proyectoId: 2,
+         },
+         {
+            nombre: 'Elegir Hosting',
+            estado: false,
+            proyectoId: 3,
+         },
+         {
+            nombre: 'Elegir Plataforma',
+            estado: true,
+            proyectoId: 1,
+         },
+         {
+            nombre: 'Elegir Colores',
+            estado: false,
+            proyectoId: 2,
+         },
+         {
+            nombre: 'Elegir Hosting',
+            estado: false,
+            proyectoId: 3,
+         },
+      ],
    };
 
    // Crear dispatch y state
@@ -13,11 +44,9 @@ const TareaState = ({ children }) => {
    return (
       <TareaContext.Provider
          //
-         value={
-            {
-               //
-            }
-         }>
+         value={{
+            tareas: state.tareas,
+         }}>
          {children}
       </TareaContext.Provider>
    );

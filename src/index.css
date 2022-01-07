@@ -347,8 +347,10 @@ aside {
 }
 .error {
    max-width: 600px;
+   padding: 14px;
    margin: 2rem auto 0 auto;
-   background-color: rgb(170, 0, 0);
+   background-color: rgba(170, 0, 0, 0.726);
+   border-radius: 0.5rem;
    color: var(--blanco);
 }
 

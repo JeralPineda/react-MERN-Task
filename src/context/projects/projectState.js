@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import proyectoContext from './projectContext';
 import proyectoReducer from './projectReducer';
-import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS } from '../../types';
+import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS, VALIDAR_FORMULARIO } from '../../types';
 
 const ProyectoState = ({ children }) => {
    const proyectos = [
@@ -24,6 +24,7 @@ const ProyectoState = ({ children }) => {
    const initialState = {
       proyectos: [],
       formulario: false,
+      errorformulario: false,
    };
 
    // Dispatch para ejecutar las acciones
@@ -55,15 +56,24 @@ const ProyectoState = ({ children }) => {
       });
    };
 
+   // Validar el formulario por errores
+   const mostrarErrorProyecto = () => {
+      dispatch({
+         type: VALIDAR_FORMULARIO,
+      });
+   };
+
    return (
       <proyectoContext.Provider
          //
          value={{
             proyectos: state.proyectos,
             formulario: state.formulario,
+            errorformulario: state.errorformulario,
             mostrarFormulario,
             obtenerProyectos,
             agregarProyecto,
+            mostrarErrorProyecto,
          }}>
          {children}
       </proyectoContext.Provider>

@@ -2,7 +2,7 @@ import { useReducer } from 'react';
 import TareaContext from './tareaContext';
 import TareaReducer from './tareaReducer';
 
-import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA, ELIMIANAR_TAREA } from '../../types';
+import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA, ELIMIANAR_TAREA, ESTADO_TAREA } from '../../types';
 
 const TareaState = ({ children }) => {
    const initialState = {
@@ -84,6 +84,14 @@ const TareaState = ({ children }) => {
       });
    };
 
+   // Cambia el estado de cada tarea
+   const cambiarEstadoTarea = (tarea) => {
+      dispatch({
+         type: ESTADO_TAREA,
+         payload: tarea,
+      });
+   };
+
    return (
       <TareaContext.Provider
          //
@@ -95,6 +103,7 @@ const TareaState = ({ children }) => {
             agregarTarea,
             validarTarea,
             eliminarTarea,
+            cambiarEstadoTarea,
          }}>
          {children}
       </TareaContext.Provider>

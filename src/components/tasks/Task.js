@@ -11,11 +11,21 @@ const Task = ({ tarea }) => {
 
    // Obtener la función del context de tarea
    const tareasContext = useContext(TareaContext);
-   const { eliminarTarea, obtenerTareas } = tareasContext;
+   const { eliminarTarea, obtenerTareas, cambiarEstadoTarea } = tareasContext;
 
    const handleEliminarTarea = (id) => {
       eliminarTarea(id);
       obtenerTareas(proyectoActual.id);
+   };
+
+   // funcion para modificar el estado de las tareas
+   const cambiarEstado = (tarea) => {
+      if (tarea.estado) {
+         tarea.estado = false;
+      } else {
+         tarea.estado = true;
+      }
+      cambiarEstadoTarea(tarea);
    };
 
    return (
@@ -27,6 +37,7 @@ const Task = ({ tarea }) => {
                <button
                   //
                   type="button"
+                  onClick={() => cambiarEstado(tarea)}
                   className="completo">
                   Completo
                </button>
@@ -34,6 +45,7 @@ const Task = ({ tarea }) => {
                <button
                   //
                   type="button"
+                  onClick={() => cambiarEstado(tarea)}
                   className="incompleto">
                   Incompleto
                </button>

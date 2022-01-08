@@ -7,13 +7,14 @@ import proyectoContext from '../../context/projects/projectContext';
 import TareaContext from '../../context/tasks/tareaContext';
 
 const ListTasks = () => {
+   //    const nodeRef = useRef(null);
    // Obtener el state de proyectos
    const proyectosContext = useContext(proyectoContext);
    const { proyecto, eliminarProyecto } = proyectosContext;
 
    // Obtener las tareas del proyecto
    const tareasContext = useContext(TareaContext);
-   const { tareasproyecto } = tareasContext;
+   const { tareasproyecto, nodeRef } = tareasContext;
 
    // Si no hay proyecto seleccionado
    if (!proyecto) return <h2>Selecciona un Proyecto</h2>;
@@ -41,6 +42,7 @@ const ListTasks = () => {
                         //
                         key={tarea.id}
                         timeout={200}
+                        nodeRef={nodeRef}
                         classNames="tarea">
                         <Task tarea={tarea} />
                      </CSSTransition>

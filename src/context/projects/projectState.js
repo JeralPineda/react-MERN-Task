@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import proyectoContext from './projectContext';
@@ -80,6 +80,9 @@ const ProyectoState = ({ children }) => {
       });
    };
 
+   // Referencia al dom, para el error de strict mode react dom
+   const nodeRef = useRef(null);
+
    return (
       <proyectoContext.Provider
          //
@@ -94,6 +97,7 @@ const ProyectoState = ({ children }) => {
             mostrarErrorProyecto,
             proyectoActual,
             eliminarProyecto,
+            nodeRef,
          }}>
          {children}
       </proyectoContext.Provider>

@@ -8,7 +8,7 @@ import proyectoContext from '../../context/projects/projectContext';
 const ListProjects = () => {
    // obtener los proyectos desde el state inicial context
    const proyectosContext = useContext(proyectoContext);
-   const { proyectos, obtenerProyectos } = proyectosContext;
+   const { proyectos, obtenerProyectos, nodeRef } = proyectosContext;
 
    // Obtener proyectos cuando carga el componente
    useEffect(() => {
@@ -25,6 +25,7 @@ const ListProjects = () => {
                   //
                   key={proyecto.id}
                   timeout={200}
+                  nodeRef={nodeRef}
                   classNames="proyecto">
                   <Project proyecto={proyecto} />
                </CSSTransition>

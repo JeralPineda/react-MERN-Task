@@ -1,8 +1,8 @@
-import { useReducer } from 'react';
+import { useReducer, useRef } from 'react';
 import TareaContext from './tareaContext';
 import TareaReducer from './tareaReducer';
 
-import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA, ELIMIANAR_TAREA, ESTADO_TAREA } from '../../types';
+import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA, ELIMIANAR_TAREA, ESTADO_TAREA, TAREA_ACTUAL } from '../../types';
 
 const TareaState = ({ children }) => {
    const initialState = {
@@ -46,6 +46,7 @@ const TareaState = ({ children }) => {
       ],
       tareasproyecto: null,
       errortarea: false,
+      tareaseleccionada: null,
    };
 
    // Crear dispatch y state
@@ -92,6 +93,17 @@ const TareaState = ({ children }) => {
       });
    };
 
+   // Extraer una tarea para edición
+   const guardarTareaActual = (tarea) => {
+      dispatch({
+         type: TAREA_ACTUAL,
+         payload: tarea,
+      });
+   };
+
+   // Referencia al dom, para el error de strict mode react dom
+   const nodeRef = useRef(null);
+
    return (
       <TareaContext.Provider
          //
@@ -99,11 +111,14 @@ const TareaState = ({ children }) => {
             tareas: state.tareas,
             tareasproyecto: state.tareasproyecto,
             errortarea: state.errortarea,
+            tareaseleccionada: state.tareaseleccionada,
+            nodeRef,
             obtenerTareas,
             agregarTarea,
             validarTarea,
             eliminarTarea,
             cambiarEstadoTarea,
+            guardarTareaActual,
          }}>
          {children}
       </TareaContext.Provider>

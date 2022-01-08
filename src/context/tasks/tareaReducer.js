@@ -1,4 +1,4 @@
-import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA, ELIMIANAR_TAREA, ESTADO_TAREA } from '../../types';
+import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA, ELIMIANAR_TAREA, ESTADO_TAREA, TAREA_ACTUAL } from '../../types';
 
 const TareaReducer = (state, action) => {
    switch (action.type) {
@@ -27,6 +27,11 @@ const TareaReducer = (state, action) => {
          return {
             ...state,
             tareas: state.tareasproyecto.map((tarea) => (tarea.id === action.payload.id ? action.payload : tarea)),
+         };
+      case TAREA_ACTUAL:
+         return {
+            ...state,
+            tareaseleccionada: action.payload,
          };
       default:
          return state;

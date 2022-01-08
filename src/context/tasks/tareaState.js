@@ -2,7 +2,7 @@ import { useReducer } from 'react';
 import TareaContext from './tareaContext';
 import TareaReducer from './tareaReducer';
 
-import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA } from '../../types';
+import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA, ELIMIANAR_TAREA } from '../../types';
 
 const TareaState = ({ children }) => {
    const initialState = {
@@ -76,6 +76,14 @@ const TareaState = ({ children }) => {
       });
    };
 
+   // Eliminar una tarea por id
+   const eliminarTarea = (id) => {
+      dispatch({
+         type: ELIMIANAR_TAREA,
+         payload: id,
+      });
+   };
+
    return (
       <TareaContext.Provider
          //
@@ -86,6 +94,7 @@ const TareaState = ({ children }) => {
             obtenerTareas,
             agregarTarea,
             validarTarea,
+            eliminarTarea,
          }}>
          {children}
       </TareaContext.Provider>

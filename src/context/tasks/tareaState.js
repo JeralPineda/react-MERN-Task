@@ -2,7 +2,7 @@ import { useReducer, useRef } from 'react';
 import TareaContext from './tareaContext';
 import TareaReducer from './tareaReducer';
 
-import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA, ELIMIANAR_TAREA, ESTADO_TAREA, TAREA_ACTUAL } from '../../types';
+import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA, ELIMIANAR_TAREA, ESTADO_TAREA, TAREA_ACTUAL, ACTUALIZAR_TAREA } from '../../types';
 
 const TareaState = ({ children }) => {
    const initialState = {
@@ -104,6 +104,14 @@ const TareaState = ({ children }) => {
    // Referencia al dom, para el error de strict mode react dom
    const nodeRef = useRef(null);
 
+   // Editar una tarea
+   const actualizarTarea = (tarea) => {
+      dispatch({
+         type: ACTUALIZAR_TAREA,
+         payload: tarea,
+      });
+   };
+
    return (
       <TareaContext.Provider
          //
@@ -119,6 +127,7 @@ const TareaState = ({ children }) => {
             eliminarTarea,
             cambiarEstadoTarea,
             guardarTareaActual,
+            actualizarTarea,
          }}>
          {children}
       </TareaContext.Provider>

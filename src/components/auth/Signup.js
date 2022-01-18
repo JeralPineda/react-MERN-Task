@@ -33,11 +33,20 @@ const Signup = () => {
       //Validar el formulario
       if (nombre.trim() === '' || email.trim() === '' || password.trim() === '' || confirmar.trim === '') {
          mostrarAlerta('Todos los campos son obligatorios', 'alerta-error');
+         return;
       }
 
       // Password mínimo de 6 caracteres
+      if (password.length < 6) {
+         mostrarAlerta('El password debe contener al menos 6 caracteres', 'alerta-error');
+         return;
+      }
 
       // Los 2 password son iguales
+      if (password !== confirmar) {
+         mostrarAlerta('Los password no son iguales', 'alerta-error');
+         return;
+      }
 
       //Pasar al action
    };

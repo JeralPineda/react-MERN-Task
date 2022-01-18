@@ -23,6 +23,7 @@ const AlertaState = ({ children }) => {
          },
       });
 
+      // Después de cinco segundos se oculta la alerta
       setTimeout(() => {
          dispatch({
             type: OCULTAR_ALERTA,

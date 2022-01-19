@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
-import { fetchSinToken } from '../../helpers/fetch';
-import { REGISTRO_ERROR, REGISTRO_EXITOSO } from '../../types';
+import { fetchConToken, fetchSinToken } from '../../helpers/fetch';
+import { OBTENER_USUARIO, REGISTRO_ERROR, REGISTRO_EXITOSO } from '../../types';
 
 import authContext from './authContext';
 import AuthReducer from './authReducer';
@@ -16,6 +16,8 @@ const AuthState = ({ children }) => {
    const [state, dispatch] = useReducer(AuthReducer, initialState);
 
    //Las Funciones
+
+   //Registrar un nuevo usuario
    const registrarUsuario = async (datos) => {
       //    Petición login
       const resp = await fetchSinToken('usuarios', datos, 'POST');
@@ -27,6 +29,34 @@ const AuthState = ({ children }) => {
 
          dispatch({
             type: REGISTRO_EXITOSO,
+            payload: body,
+         });
+
+         // obtener el usuario
+         usuarioAutenticado();
+      } else {
+         const alerta = {
+            msg: body.msg,
+            categoria: 'alerta-error',
+         };
+
+         dispatch({
+            type: REGISTRO_ERROR,
+            payload: alerta,
+         });
+      }
+   };
+
+   // Retorna el usuario autenticado
+   const usuarioAutenticado = async () => {
+      const resp = await fetchConToken('auth');
+
+      const body = await resp.json();
+
+      if (body.ok) {
+         localStorage.getItem('token');
+         dispatch({
+            type: OBTENER_USUARIO,
             payload: body,
          });
       } else {

@@ -16,6 +16,23 @@ const authReducer = (state, action) => {
             token: null,
             mensaje: action.payload,
          };
+      case OBTENER_USUARIO:
+         localStorage.setItem('token', action.payload.token);
+
+         return {
+            ...state,
+            usuario: {
+               name: action.payload.name,
+               id: action.payload.id,
+            },
+         };
+      case LOGIN_ERROR:
+         localStorage.removeItem('token');
+         return {
+            ...state,
+            token: null,
+         };
+
       default:
          return state;
    }

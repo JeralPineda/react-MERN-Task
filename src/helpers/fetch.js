@@ -20,7 +20,7 @@ const fetchConToken = (endpoint, data, method = 'GET') => {
    const url = `${baseUrl}/${endpoint}`; //localhost:400/api/
 
    //    leer el token del localstorage
-   const xtoken = localStorage.getItem('x-token') || '';
+   const xtoken = localStorage.getItem('token') || '';
 
    const token = `Bearer ${xtoken}`;
 

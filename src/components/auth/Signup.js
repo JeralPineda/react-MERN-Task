@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 import AlertaContext from '../../context/alerts/alertContext';
 import AuthContext from '../../context/auth/authContext';
@@ -11,7 +11,21 @@ const Signup = () => {
    const { alerta, mostrarAlerta } = alertaContext;
 
    const authContext = useContext(AuthContext);
-   const { registrarUsuario } = authContext;
+   const { mensaje, autenticado, registrarUsuario } = authContext;
+
+   let history = useNavigate();
+
+   // En caso de que el usuario se halla autenticado, registrado o duplicado
+   useEffect(() => {
+      if (autenticado) {
+         history('/proyectos');
+      }
+
+      if (mensaje) {
+         mostrarAlerta(mensaje.msg, mensaje.categoria);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [mensaje, autenticado, history]);
 
    // State para iniciar sesión
    const [usuario, setUsuario] = useState({

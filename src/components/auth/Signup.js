@@ -54,6 +54,14 @@ const Signup = () => {
 
       //Pasar al action
       registrarUsuario({ nombre, email, password });
+
+      // Limpiamos el formulario
+      setUsuario({
+         nombre: '',
+         email: '',
+         password: '',
+         confirmar: '',
+      });
    };
 
    return (

@@ -8,7 +8,6 @@ import AuthReducer from './authReducer';
 const AuthState = ({ children }) => {
    const initialState = {
       token: localStorage.getItem('token'),
-      date: localStorage.getItem('token-init-date'), //fecha en que se creo el token
       autenticado: null,
       usuario: null,
       mensaje: null,
@@ -18,21 +17,27 @@ const AuthState = ({ children }) => {
 
    //Las Funciones
    const registrarUsuario = async (datos) => {
-      try {
-         //    Petición login
-         const resp = await fetchSinToken('usuarios', datos, 'POST');
+      //    Petición login
+      const resp = await fetchSinToken('usuarios', datos, 'POST');
 
-         const body = await resp.json();
+      const body = await resp.json();
 
-         console.log(body);
+      if (body.ok) {
+         localStorage.getItem('token');
 
          dispatch({
             type: REGISTRO_EXITOSO,
+            payload: body,
          });
-      } catch (error) {
-         console.log(error);
+      } else {
+         const alerta = {
+            msg: body.msg,
+            categoria: 'alerta-error',
+         };
+
          dispatch({
             type: REGISTRO_ERROR,
+            payload: alerta,
          });
       }
    };

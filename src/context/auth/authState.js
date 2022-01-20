@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import { fetchConToken, fetchSinToken } from '../../helpers/fetch';
-import { OBTENER_USUARIO, REGISTRO_ERROR, REGISTRO_EXITOSO } from '../../types';
+import { LOGIN_ERROR, LOGIN_EXITOSO, OBTENER_USUARIO, REGISTRO_ERROR, REGISTRO_EXITOSO } from '../../types';
 
 import authContext from './authContext';
 import AuthReducer from './authReducer';
@@ -72,6 +72,30 @@ const AuthState = ({ children }) => {
       }
    };
 
+   //Iniciar sesión con email y password
+   const iniciarSesion = async (datos) => {
+      const resp = await fetchSinToken('auth', datos, 'POST');
+
+      const body = await resp.json();
+      console.log(body);
+
+      if (body.ok) {
+         //  dispatch({
+         //     type: LOGIN_EXITOSO,
+         //  });
+      } else {
+         const alerta = {
+            msg: body.msg,
+            categoria: 'alerta-error',
+         };
+
+         dispatch({
+            type: LOGIN_ERROR,
+            payload: alerta,
+         });
+      }
+   };
+
    return (
       <authContext.Provider
          //
@@ -82,6 +106,7 @@ const AuthState = ({ children }) => {
             usuario: state.usuario,
             mensaje: state.mensaje,
             registrarUsuario,
+            iniciarSesion,
          }}>
          {children}
       </authContext.Provider>

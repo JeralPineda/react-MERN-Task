@@ -49,7 +49,7 @@ const Signup = () => {
       e.preventDefault();
 
       //Validar el formulario
-      if (nombre.trim() === '' || email.trim() === '' || password.trim() === '' || confirmar.trim === '') {
+      if (nombre.trim() === '' || email.trim() === '' || password.trim() === '' || confirmar.trim() === '') {
          mostrarAlerta('Todos los campos son obligatorios', 'alerta-error');
          return;
       }

@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import { fetchConToken, fetchSinToken } from '../../helpers/fetch';
-import { LOGIN_ERROR, LOGIN_EXITOSO, OBTENER_USUARIO, REGISTRO_ERROR, REGISTRO_EXITOSO } from '../../types';
+import { LOGIN_ERROR, LOGIN_EXITOSO, LOGIN_GOOGLE, LOGIN_GOOGLE_ERROR, OBTENER_USUARIO, REGISTRO_ERROR, REGISTRO_EXITOSO } from '../../types';
 
 import authContext from './authContext';
 import AuthReducer from './authReducer';
@@ -99,6 +99,33 @@ const AuthState = ({ children }) => {
       }
    };
 
+   // Iniciar sesión con Google
+   const iniciarSesionGoogle = async (datos) => {
+      const resp = await fetchConToken('auth/google', datos, 'POST');
+
+      const body = await resp.json();
+
+      if (body.ok) {
+         dispatch({
+            type: LOGIN_GOOGLE,
+            payload: body,
+         });
+
+         // obtener el usuario
+         usuarioAutenticado();
+      } else {
+         const alerta = {
+            msg: body.errors ? body.errors.id_token.msg : body.msg, //condicional para extraer msg de express-validator
+            categoria: 'alerta-error',
+         };
+
+         dispatch({
+            type: LOGIN_GOOGLE_ERROR,
+            payload: alerta,
+         });
+      }
+   };
+
    return (
       <authContext.Provider
          //
@@ -110,6 +137,7 @@ const AuthState = ({ children }) => {
             mensaje: state.mensaje,
             registrarUsuario,
             iniciarSesion,
+            iniciarSesionGoogle,
          }}>
          {children}
       </authContext.Provider>

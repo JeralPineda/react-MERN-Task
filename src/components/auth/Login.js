@@ -12,7 +12,7 @@ const Login = () => {
    const { alerta, mostrarAlerta } = alertaContext;
 
    const authContext = useContext(AuthContext);
-   const { mensaje, autenticado, iniciarSesion } = authContext;
+   const { mensaje, autenticado, iniciarSesion, iniciarSesionGoogle } = authContext;
 
    let history = useNavigate();
 
@@ -63,18 +63,25 @@ const Login = () => {
       });
    };
 
+   // Funciones inicio sesión con google
    const onSuccess = (res) => {
-      console.log(res.accessToken);
+      //construimos la data para el body
+      const datos = {
+         id_token: res.tokenId,
+      };
+
+      iniciarSesionGoogle(datos);
    };
+
    const onFailure = (res) => {
-      console.log(res);
+      res.details ? mostrarAlerta(res.details, 'alerta-error') : mostrarAlerta('Error al iniciar sesión con Google', 'alerta-error');
    };
 
    const { signIn } = useGoogleLogin({
       onSuccess,
       onFailure,
       clientId: process.env.REACT_APP_CLIENT_ID_GOOGLE,
-      isSignedIn: true,
+      isSignedIn: false, //mantiene la sesión iniciada
       accessType: 'offline',
    });
 
@@ -121,7 +128,7 @@ const Login = () => {
                   </button>
                </div>
 
-               {/* Boton de google */}
+               {/* Botón de google */}
                <div className="google-btn" onClick={signIn}>
                   <div className="google-icon-wrapper">
                      <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
@@ -131,7 +138,7 @@ const Login = () => {
                   </p>
                </div>
 
-               {/* Boton de Github */}
+               {/* Botón de Github */}
                <div className="google-btn">
                   <div className="google-icon-wrapper">
                      <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Font_Awesome_5_brands_github.svg/640px-Font_Awesome_5_brands_github.svg.png" alt="google button" />

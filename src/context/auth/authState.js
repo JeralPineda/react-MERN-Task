@@ -77,15 +77,18 @@ const AuthState = ({ children }) => {
       const resp = await fetchSinToken('auth', datos, 'POST');
 
       const body = await resp.json();
-      console.log(body);
 
       if (body.ok) {
-         //  dispatch({
-         //     type: LOGIN_EXITOSO,
-         //  });
+         dispatch({
+            type: LOGIN_EXITOSO,
+            payload: body,
+         });
+
+         // obtener el usuario
+         usuarioAutenticado();
       } else {
          const alerta = {
-            msg: body.msg,
+            msg: body.errors ? body.errors.password.msg : body.msg, //condicional para extraer msg de express-validator
             categoria: 'alerta-error',
          };
 

@@ -3,6 +3,7 @@ import { REGISTRO_EXITOSO, REGISTRO_ERROR, OBTENER_USUARIO, LOGIN_EXITOSO, LOGIN
 const authReducer = (state, action) => {
    switch (action.type) {
       case REGISTRO_EXITOSO:
+      case LOGIN_EXITOSO:
          localStorage.setItem('token', action.payload.token);
 
          return {
@@ -10,6 +11,7 @@ const authReducer = (state, action) => {
             autenticado: true,
             mensaje: null,
          };
+      case LOGIN_ERROR:
       case REGISTRO_ERROR:
          return {
             ...state,
@@ -25,12 +27,6 @@ const authReducer = (state, action) => {
                name: action.payload.name,
                id: action.payload.id,
             },
-         };
-      case LOGIN_ERROR:
-         localStorage.removeItem('token');
-         return {
-            ...state,
-            token: null,
          };
 
       default:

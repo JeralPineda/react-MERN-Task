@@ -15,7 +15,7 @@ const Login = () => {
    const authContext = useContext(AuthContext);
    const { mensaje, autenticado, iniciarSesion, iniciarSesionGoogle, iniciarSesionGitHub } = authContext;
 
-   let history = useNavigate();
+   let navigate = useNavigate();
 
    // Inicio de sesión con GitHub
    let url = window.location.href;
@@ -24,7 +24,7 @@ const Login = () => {
    // En caso de que el usuario se halla autenticado, registrado o duplicado
    useEffect(() => {
       if (autenticado) {
-         history('/proyectos');
+         navigate('/proyectos');
       }
 
       if (mensaje) {

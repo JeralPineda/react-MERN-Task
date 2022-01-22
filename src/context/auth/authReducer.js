@@ -5,6 +5,7 @@ const authReducer = (state, action) => {
       case REGISTRO_EXITOSO:
       case LOGIN_EXITOSO:
       case LOGIN_GOOGLE:
+      case LOGIN_GITHUB:
          localStorage.setItem('token', action.payload.token);
 
          return {
@@ -15,6 +16,7 @@ const authReducer = (state, action) => {
       case LOGIN_ERROR:
       case REGISTRO_ERROR:
       case LOGIN_GOOGLE_ERROR:
+      case LOGIN_GITHUB_ERROR:
          return {
             ...state,
             token: null,

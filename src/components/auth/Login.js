@@ -4,6 +4,7 @@ import { useGoogleLogin } from 'react-google-login';
 
 import AlertaContext from '../../context/alerts/alertContext';
 import AuthContext from '../../context/auth/authContext';
+import { authorizeUri, clientId, clientIdGitHub, redirectUri } from '../../helpers/config';
 
 const Login = () => {
    //Extraer los valores del context
@@ -12,9 +13,13 @@ const Login = () => {
    const { alerta, mostrarAlerta } = alertaContext;
 
    const authContext = useContext(AuthContext);
-   const { mensaje, autenticado, iniciarSesion, iniciarSesionGoogle } = authContext;
+   const { mensaje, autenticado, iniciarSesion, iniciarSesionGoogle, iniciarSesionGitHub } = authContext;
 
    let history = useNavigate();
+
+   // Inicio de sesión con GitHub
+   let url = window.location.href;
+   let hasCode = url.includes('?token=');
 
    // En caso de que el usuario se halla autenticado, registrado o duplicado
    useEffect(() => {
@@ -25,10 +30,19 @@ const Login = () => {
       if (mensaje) {
          mostrarAlerta(mensaje.msg, mensaje.categoria);
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [mensaje, autenticado, history]);
 
-   // State para iniciar sesión
+      // Inicio de sesión con GitHub
+      if (hasCode) {
+         const tokenUrl = url.split('?token=');
+         const token = tokenUrl[1];
+
+         iniciarSesionGitHub(token);
+      }
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [mensaje, autenticado, hasCode, url, history]);
+
+   // State para iniciar sesión con email y password
    const [usuario, setUsuario] = useState({
       email: '',
       password: '',
@@ -74,13 +88,15 @@ const Login = () => {
    };
 
    const onFailure = (res) => {
-      res.details ? mostrarAlerta(res.details, 'alerta-error') : mostrarAlerta('Error al iniciar sesión con Google', 'alerta-error');
+      //   res.details ? mostrarAlerta(res.details, 'alerta-error') : mostrarAlerta('Error al iniciar sesión con Google', 'alerta-error');
+
+      if (!res.details) return mostrarAlerta('Error al iniciar sesión con Google', 'alerta-error');
    };
 
    const { signIn } = useGoogleLogin({
       onSuccess,
       onFailure,
-      clientId: process.env.REACT_APP_CLIENT_ID_GOOGLE,
+      clientId,
       isSignedIn: false, //mantiene la sesión iniciada
       accessType: 'offline',
    });
@@ -139,14 +155,14 @@ const Login = () => {
                </div>
 
                {/* Botón de Github */}
-               <div className="google-btn">
+               <a href={`${authorizeUri}?client_id=${clientIdGitHub}&redirect_uri=${redirectUri}`} className="google-btn">
                   <div className="google-icon-wrapper">
                      <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Font_Awesome_5_brands_github.svg/640px-Font_Awesome_5_brands_github.svg.png" alt="google button" />
                   </div>
                   <p className="btn-text">
                      <b>Acceder con GitHub</b>
                   </p>
-               </div>
+               </a>
             </form>
 
             <Link to="/nueva-cuenta" className="enlace-cuenta">

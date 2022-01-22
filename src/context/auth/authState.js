@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import { fetchConToken, fetchSinToken } from '../../helpers/fetch';
-import { LOGIN_ERROR, LOGIN_EXITOSO, LOGIN_GOOGLE, LOGIN_GOOGLE_ERROR, OBTENER_USUARIO, REGISTRO_ERROR, REGISTRO_EXITOSO } from '../../types';
+import { LOGIN_ERROR, LOGIN_EXITOSO, LOGIN_GITHUB, LOGIN_GITHUB_ERROR, LOGIN_GOOGLE, LOGIN_GOOGLE_ERROR, OBTENER_USUARIO, REGISTRO_ERROR, REGISTRO_EXITOSO } from '../../types';
 
 import authContext from './authContext';
 import AuthReducer from './authReducer';
@@ -126,6 +126,31 @@ const AuthState = ({ children }) => {
       }
    };
 
+   // Iniciar sesión con GitHub
+   const iniciarSesionGitHub = (token) => {
+      if (token) {
+         dispatch({
+            type: LOGIN_GITHUB,
+            payload: {
+               token,
+            },
+         });
+
+         // obtener el usuario
+         usuarioAutenticado();
+      } else {
+         const alerta = {
+            msg: 'Token no valido',
+            categoria: 'alerta-error',
+         };
+
+         dispatch({
+            type: LOGIN_GITHUB_ERROR,
+            payload: alerta,
+         });
+      }
+   };
+
    return (
       <authContext.Provider
          //
@@ -138,6 +163,7 @@ const AuthState = ({ children }) => {
             registrarUsuario,
             iniciarSesion,
             iniciarSesionGoogle,
+            iniciarSesionGitHub,
          }}>
          {children}
       </authContext.Provider>

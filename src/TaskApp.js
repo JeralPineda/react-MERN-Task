@@ -8,7 +8,7 @@ import TareaState from './context/tasks/tareaState';
 import AlertaState from './context/alerts/alertState';
 import AuthState from './context/auth/authState';
 
-function App() {
+function TaskApp() {
    return (
       <ProyectoState>
          <TareaState>
@@ -28,4 +28,4 @@ function App() {
    );
 }
 
-export default App;
+export default TaskApp;

@@ -40,7 +40,7 @@ const Login = () => {
       }
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [mensaje, autenticado, hasCode, url, history]);
+   }, [mensaje, autenticado, hasCode, url, navigate]);
 
    // State para iniciar sesión con email y password
    const [usuario, setUsuario] = useState({

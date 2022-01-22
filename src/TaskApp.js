@@ -7,6 +7,7 @@ import ProyectoState from './context/projects/projectState';
 import TareaState from './context/tasks/tareaState';
 import AlertaState from './context/alerts/alertState';
 import AuthState from './context/auth/authState';
+import AppRouter from './routers/AppRouter';
 
 function TaskApp() {
    return (
@@ -14,13 +15,7 @@ function TaskApp() {
          <TareaState>
             <AlertaState>
                <AuthState>
-                  <Router>
-                     <Routes>
-                        <Route path="/" element={<Login />} />
-                        <Route path="/nueva-cuenta" element={<Signup />} />
-                        <Route path="/proyectos" element={<Projects />} />
-                     </Routes>
-                  </Router>
+                  <AppRouter />
                </AuthState>
             </AlertaState>
          </TareaState>

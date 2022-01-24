@@ -164,6 +164,7 @@ const AuthState = ({ children }) => {
             iniciarSesion,
             iniciarSesionGoogle,
             iniciarSesionGitHub,
+            usuarioAutenticado,
          }}>
          {children}
       </authContext.Provider>

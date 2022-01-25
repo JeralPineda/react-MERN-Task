@@ -4,11 +4,12 @@ import AuthContext from '../../context/auth/authContext';
 const Header = () => {
    //Extraer el usuario del authContext
    const authContext = useContext(AuthContext);
-   const { usuario, usuarioAutenticado } = authContext;
+   const { usuario, cerrarSesion } = authContext;
 
-   useEffect(() => {
-      usuarioAutenticado();
-   });
+   //Cerrar la sesión
+   const handleCerrarSesion = () => {
+      cerrarSesion();
+   };
 
    return (
       <header className="app-header">
@@ -19,7 +20,12 @@ const Header = () => {
          ) : null}
 
          <nav className="nav-principal">
-            <a href="#!">Cerrar Sesión</a>
+            <button
+               //
+               className="btn btn-blank cerrar-sesion"
+               onClick={handleCerrarSesion}>
+               Cerrar Sesión
+            </button>
          </nav>
       </header>
    );

@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import { fetchConToken, fetchSinToken } from '../../helpers/fetch';
-import { LOGIN_ERROR, LOGIN_EXITOSO, LOGIN_GITHUB, LOGIN_GITHUB_ERROR, LOGIN_GOOGLE, LOGIN_GOOGLE_ERROR, OBTENER_USUARIO, REGISTRO_ERROR, REGISTRO_EXITOSO } from '../../types';
+import { CERRAR_SESION, LOGIN_ERROR, LOGIN_EXITOSO, LOGIN_GITHUB, LOGIN_GITHUB_ERROR, LOGIN_GOOGLE, LOGIN_GOOGLE_ERROR, OBTENER_USUARIO, REGISTRO_ERROR, REGISTRO_EXITOSO } from '../../types';
 
 import authContext from './authContext';
 import AuthReducer from './authReducer';
@@ -151,6 +151,13 @@ const AuthState = ({ children }) => {
       }
    };
 
+   // Cerrar sesión del usuario
+   const cerrarSesion = () => {
+      dispatch({
+         type: CERRAR_SESION,
+      });
+   };
+
    return (
       <authContext.Provider
          //
@@ -165,6 +172,7 @@ const AuthState = ({ children }) => {
             iniciarSesionGoogle,
             iniciarSesionGitHub,
             usuarioAutenticado,
+            cerrarSesion,
          }}>
          {children}
       </authContext.Provider>

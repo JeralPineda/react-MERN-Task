@@ -13,13 +13,18 @@ const authReducer = (state, action) => {
             autenticado: true,
             mensaje: null,
          };
+      case CERRAR_SESION:
       case LOGIN_ERROR:
       case REGISTRO_ERROR:
       case LOGIN_GOOGLE_ERROR:
       case LOGIN_GITHUB_ERROR:
+         localStorage.removeItem('token');
+
          return {
             ...state,
             token: null,
+            usuario: null,
+            autenticado: null,
             mensaje: action.payload,
          };
       case OBTENER_USUARIO:

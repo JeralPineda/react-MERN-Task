@@ -99,6 +99,9 @@ a {
    display: block;
    background-color: transparent;
 }
+.cerrar-sesion {
+   color: var(--blanco);
+}
 
 /* boton google */
 

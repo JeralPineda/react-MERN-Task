@@ -3,7 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 import proyectoContext from './projectContext';
 import proyectoReducer from './projectReducer';
-import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS, VALIDAR_FORMULARIO, PROYECTO_ACTUAL, ELIMINAR_PROYECTO } from '../../types';
+import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS, VALIDAR_FORMULARIO, PROYECTO_ACTUAL, ELIMINAR_PROYECTO, AGREGAR_PROYECTO } from '../../types';
+import { fetchConToken } from '../../helpers/fetch';
 
 const ProyectoState = ({ children }) => {
    const proyectos = [
@@ -47,13 +48,15 @@ const ProyectoState = ({ children }) => {
    };
 
    // Agregar nuevo proyecto
-   const agregarProyecto = (proyecto) => {
-      proyecto.id = uuidv4();
+   const agregarProyecto = async (proyecto) => {
+      //    Petición login
+      const resp = await fetchConToken('proyectos', proyecto, 'POST');
 
-      // Insertar el proyecto en el state
+      const body = await resp.json();
+
       dispatch({
-         type: 'AGREGAR_PROYECTO',
-         payload: proyecto,
+         type: AGREGAR_PROYECTO,
+         payload: body,
       });
    };
 

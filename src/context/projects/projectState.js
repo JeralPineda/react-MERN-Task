@@ -49,15 +49,30 @@ const ProyectoState = ({ children }) => {
 
    // Agregar nuevo proyecto
    const agregarProyecto = async (proyecto) => {
-      //    Petición login
+      //    Petición crear proyecto
       const resp = await fetchConToken('proyectos', proyecto, 'POST');
 
       const body = await resp.json();
 
+      //   if (body.ok) {
+
+      // Insertar el proyecto en el state
       dispatch({
          type: AGREGAR_PROYECTO,
          payload: body,
       });
+
+      //   } else {
+      //      const alerta = {
+      //         msg: body.msg,
+      //         categoria: 'alerta-error',
+      //      };
+
+      //      dispatch({
+      //         type: REGISTRO_ERROR,
+      //         payload: alerta,
+      //      });
+      //   }
    };
 
    // Validar el formulario por errores

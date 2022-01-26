@@ -4,7 +4,7 @@ import { useGoogleLogin } from 'react-google-login';
 
 import AlertaContext from '../../context/alerts/alertContext';
 import AuthContext from '../../context/auth/authContext';
-import { authorizeUri, clientId, clientIdGitHub, redirectUri, kookie } from '../../helpers/config';
+import { authorizeUri, clientId, clientIdGitHub, redirectUri, cookie } from '../../helpers/config';
 
 const Login = () => {
    //Extraer los valores del context
@@ -93,13 +93,15 @@ const Login = () => {
       if (!res.details) return mostrarAlerta('Error al iniciar sesión con Google', 'alerta-error');
    };
 
+   console.log(cookie);
+
    const { signIn } = useGoogleLogin({
       onSuccess,
       onFailure,
       clientId,
       isSignedIn: false, //mantiene la sesión iniciada
       accessType: 'offline',
-      cookiePolicy: kookie,
+      cookiePolicy: cookie,
    });
 
    return (

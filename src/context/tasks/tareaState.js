@@ -74,11 +74,15 @@ const TareaState = ({ children }) => {
       }
    };
 
-   // Cambia el estado de cada tarea
-   const cambiarEstadoTarea = (tarea) => {
+   // Editar una tarea
+   const actualizarTarea = async (tarea) => {
+      const resp = await fetchConToken(`tareas/${tarea.id}`, tarea, 'PUT');
+
+      const body = await resp.json();
+
       dispatch({
-         type: ESTADO_TAREA,
-         payload: tarea,
+         type: ACTUALIZAR_TAREA,
+         payload: body.tarea,
       });
    };
 
@@ -92,14 +96,6 @@ const TareaState = ({ children }) => {
 
    // Referencia al dom, para el error de strict mode react dom
    const nodeRef = useRef(null);
-
-   // Editar una tarea
-   const actualizarTarea = (tarea) => {
-      dispatch({
-         type: ACTUALIZAR_TAREA,
-         payload: tarea,
-      });
-   };
 
    // Eliminar la tarea seleccionada
    const limpiarTarea = () => {
@@ -120,7 +116,6 @@ const TareaState = ({ children }) => {
             agregarTarea,
             validarTarea,
             eliminarTarea,
-            cambiarEstadoTarea,
             guardarTareaActual,
             actualizarTarea,
             limpiarTarea,

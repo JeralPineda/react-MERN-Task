@@ -93,8 +93,6 @@ const Login = () => {
       if (!res.details) return mostrarAlerta('Error al iniciar sesión con Google', 'alerta-error');
    };
 
-   console.log(cookie);
-
    const { signIn } = useGoogleLogin({
       onSuccess,
       onFailure,

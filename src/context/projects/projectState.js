@@ -1,5 +1,4 @@
 import { useReducer, useRef } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 import proyectoContext from './projectContext';
 import proyectoReducer from './projectReducer';
@@ -7,21 +6,6 @@ import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS, VALIDAR_FORMULARIO, PROYECTO_AC
 import { fetchConToken } from '../../helpers/fetch';
 
 const ProyectoState = ({ children }) => {
-   const proyectos = [
-      {
-         id: 1,
-         nombre: 'Tienda Virtual',
-      },
-      {
-         id: 2,
-         nombre: 'Intranet',
-      },
-      {
-         id: 3,
-         nombre: 'Diseño de sitio web',
-      },
-   ];
-
    const initialState = {
       proyectos: [],
       formulario: false,
@@ -40,10 +24,14 @@ const ProyectoState = ({ children }) => {
    };
 
    // Obtener los proyectos
-   const obtenerProyectos = () => {
+   const obtenerProyectos = async () => {
+      const resp = await fetchConToken('proyectos');
+
+      const body = await resp.json();
+
       dispatch({
          type: OBTENER_PROYECTOS,
-         payload: proyectos,
+         payload: body.proyectos,
       });
    };
 
@@ -59,7 +47,7 @@ const ProyectoState = ({ children }) => {
       // Insertar el proyecto en el state
       dispatch({
          type: AGREGAR_PROYECTO,
-         payload: body,
+         payload: body.proyecto,
       });
 
       //   } else {

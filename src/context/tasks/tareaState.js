@@ -1,52 +1,14 @@
 import { useReducer, useRef } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 import TareaContext from './tareaContext';
 import TareaReducer from './tareaReducer';
 
 import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA, ELIMIANAR_TAREA, ESTADO_TAREA, TAREA_ACTUAL, ACTUALIZAR_TAREA, LIMPIAR_TAREA } from '../../types';
+import { fetchConToken } from '../../helpers/fetch';
 
 const TareaState = ({ children }) => {
    const initialState = {
-      tareas: [
-         {
-            id: 1,
-            nombre: 'Elegir Plataforma',
-            estado: true,
-            proyectoId: 1,
-         },
-         {
-            id: 2,
-            nombre: 'Elegir Colores',
-            estado: false,
-            proyectoId: 2,
-         },
-         {
-            id: 3,
-            nombre: 'Elegir Hosting',
-            estado: false,
-            proyectoId: 3,
-         },
-         {
-            id: 4,
-            nombre: 'Elegir Plataforma',
-            estado: true,
-            proyectoId: 1,
-         },
-         {
-            id: 5,
-            nombre: 'Elegir Colores',
-            estado: false,
-            proyectoId: 2,
-         },
-         {
-            id: 6,
-            nombre: 'Elegir Hosting',
-            estado: false,
-            proyectoId: 3,
-         },
-      ],
-      tareasproyecto: null,
+      tareasproyecto: [],
       errortarea: false,
       tareaseleccionada: null,
    };
@@ -65,13 +27,22 @@ const TareaState = ({ children }) => {
    };
 
    // Agregar una tarea al proyecto seleccionado
-   const agregarTarea = (tarea) => {
-      tarea.id = uuidv4();
+   const agregarTarea = async (tarea) => {
+      console.log(tarea);
+      // Peticion a api/tareas
+      const resp = await fetchConToken('tareas', tarea, 'POST');
 
-      dispatch({
-         type: AGREGAR_TAREA,
-         payload: tarea,
-      });
+      const body = await resp.json();
+      console.log(body);
+
+      if (body.ok) {
+         dispatch({
+            type: AGREGAR_TAREA,
+            payload: tarea,
+         });
+      } else {
+         console.log(body);
+      }
    };
 
    // Valida y muestra un error en caso de que sea necesario
@@ -127,7 +98,6 @@ const TareaState = ({ children }) => {
       <TareaContext.Provider
          //
          value={{
-            tareas: state.tareas,
             tareasproyecto: state.tareasproyecto,
             errortarea: state.errortarea,
             tareaseleccionada: state.tareaseleccionada,

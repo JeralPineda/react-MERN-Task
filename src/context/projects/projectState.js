@@ -2,7 +2,7 @@ import { useReducer, useRef } from 'react';
 
 import proyectoContext from './projectContext';
 import proyectoReducer from './projectReducer';
-import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS, VALIDAR_FORMULARIO, PROYECTO_ACTUAL, ELIMINAR_PROYECTO, AGREGAR_PROYECTO } from '../../types';
+import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS, VALIDAR_FORMULARIO, PROYECTO_ACTUAL, ELIMINAR_PROYECTO, AGREGAR_PROYECTO, PROYECTO_ERROR } from '../../types';
 import { fetchConToken } from '../../helpers/fetch';
 
 const ProyectoState = ({ children }) => {
@@ -11,6 +11,7 @@ const ProyectoState = ({ children }) => {
       formulario: false,
       errorformulario: false,
       proyecto: null,
+      mensaje: null,
    };
 
    // Dispatch para ejecutar las acciones
@@ -29,10 +30,22 @@ const ProyectoState = ({ children }) => {
 
       const body = await resp.json();
 
-      dispatch({
-         type: OBTENER_PROYECTOS,
-         payload: body.proyectos,
-      });
+      if (body.ok) {
+         dispatch({
+            type: OBTENER_PROYECTOS,
+            payload: body.proyectos,
+         });
+      } else {
+         const alerta = {
+            msg: body.msg,
+            categoria: 'alerta-error',
+         };
+
+         dispatch({
+            type: PROYECTO_ERROR,
+            payload: alerta,
+         });
+      }
    };
 
    // Agregar nuevo proyecto
@@ -42,25 +55,23 @@ const ProyectoState = ({ children }) => {
 
       const body = await resp.json();
 
-      //   if (body.ok) {
+      if (body.ok) {
+         // Insertar el proyecto en el state
+         dispatch({
+            type: AGREGAR_PROYECTO,
+            payload: body.proyecto,
+         });
+      } else {
+         const alerta = {
+            msg: body.msg,
+            categoria: 'alerta-error',
+         };
 
-      // Insertar el proyecto en el state
-      dispatch({
-         type: AGREGAR_PROYECTO,
-         payload: body.proyecto,
-      });
-
-      //   } else {
-      //      const alerta = {
-      //         msg: body.msg,
-      //         categoria: 'alerta-error',
-      //      };
-
-      //      dispatch({
-      //         type: REGISTRO_ERROR,
-      //         payload: alerta,
-      //      });
-      //   }
+         dispatch({
+            type: PROYECTO_ERROR,
+            payload: alerta,
+         });
+      }
    };
 
    // Validar el formulario por errores
@@ -84,12 +95,22 @@ const ProyectoState = ({ children }) => {
 
       const body = await resp.json();
 
-      console.log(body);
+      if (body.ok) {
+         dispatch({
+            type: ELIMINAR_PROYECTO,
+            payload: proyectoId,
+         });
+      } else {
+         const alerta = {
+            msg: body.errors ? body.errors.id.msg : body.msg, //condicional para extraer msg de express-validator
+            categoria: 'alerta-error',
+         };
 
-      dispatch({
-         type: ELIMINAR_PROYECTO,
-         payload: proyectoId,
-      });
+         dispatch({
+            type: PROYECTO_ERROR,
+            payload: alerta,
+         });
+      }
    };
 
    // Referencia al dom, para el error de strict mode react dom
@@ -103,6 +124,7 @@ const ProyectoState = ({ children }) => {
             formulario: state.formulario,
             errorformulario: state.errorformulario,
             proyecto: state.proyecto,
+            mensaje: state.mensaje,
             mostrarFormulario,
             obtenerProyectos,
             agregarProyecto,

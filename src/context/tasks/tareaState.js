@@ -59,11 +59,19 @@ const TareaState = ({ children }) => {
    };
 
    // Eliminar una tarea por id
-   const eliminarTarea = (id) => {
-      dispatch({
-         type: ELIMIANAR_TAREA,
-         payload: id,
-      });
+   const eliminarTarea = async (id, proyecto) => {
+      const resp = await fetchConToken(`tareas/${id}`, { proyecto }, 'DELETE');
+
+      const body = await resp.json();
+
+      if (body.ok) {
+         dispatch({
+            type: ELIMIANAR_TAREA,
+            payload: id,
+         });
+      } else {
+         //
+      }
    };
 
    // Cambia el estado de cada tarea

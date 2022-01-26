@@ -14,7 +14,7 @@ const Task = ({ tarea }) => {
    const { eliminarTarea, obtenerTareas, cambiarEstadoTarea, guardarTareaActual } = tareasContext;
 
    const handleEliminarTarea = (id) => {
-      eliminarTarea(id);
+      eliminarTarea(id, proyectoActual.id);
       obtenerTareas(proyectoActual.id);
    };
 

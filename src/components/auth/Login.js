@@ -90,7 +90,7 @@ const Login = () => {
    const onFailure = (res) => {
       //   res.details ? mostrarAlerta(res.details, 'alerta-error') : mostrarAlerta('Error al iniciar sesión con Google', 'alerta-error');
 
-      if (!res.details) return mostrarAlerta('Error al iniciar sesión con Google', 'alerta-error');
+      if (!res.details) return mostrarAlerta('Error, las cookies están bloqueadas', 'alerta-error');
    };
 
    const { signIn } = useGoogleLogin({

@@ -19,26 +19,32 @@ const TareaState = ({ children }) => {
    // Crear las funciones
 
    // Obtener las tareas de un proyecto
-   const obtenerTareas = (proyectoId) => {
-      dispatch({
-         type: TAREAS_PROYECTO,
-         payload: proyectoId,
-      });
+   const obtenerTareas = async (proyecto) => {
+      const resp = await fetchConToken(`tareas/${proyecto}`);
+
+      const body = await resp.json();
+
+      if (body.ok) {
+         dispatch({
+            type: TAREAS_PROYECTO,
+            payload: body.tareas,
+         });
+      } else {
+         //
+      }
    };
 
    // Agregar una tarea al proyecto seleccionado
    const agregarTarea = async (tarea) => {
-      console.log(tarea);
       // Peticion a api/tareas
       const resp = await fetchConToken('tareas', tarea, 'POST');
 
       const body = await resp.json();
-      console.log(body);
 
       if (body.ok) {
          dispatch({
             type: AGREGAR_TAREA,
-            payload: tarea,
+            payload: body.tarea,
          });
       } else {
          console.log(body);

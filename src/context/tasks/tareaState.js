@@ -3,7 +3,7 @@ import { useReducer, useRef } from 'react';
 import TareaContext from './tareaContext';
 import TareaReducer from './tareaReducer';
 
-import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA, ELIMIANAR_TAREA, ESTADO_TAREA, TAREA_ACTUAL, ACTUALIZAR_TAREA, LIMPIAR_TAREA } from '../../types';
+import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA, ELIMIANAR_TAREA, TAREA_ACTUAL, ACTUALIZAR_TAREA, LIMPIAR_TAREA } from '../../types';
 import { fetchConToken } from '../../helpers/fetch';
 
 const TareaState = ({ children }) => {

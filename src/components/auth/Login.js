@@ -4,7 +4,7 @@ import { useGoogleLogin } from 'react-google-login';
 
 import AlertaContext from '../../context/alerts/alertContext';
 import AuthContext from '../../context/auth/authContext';
-import { authorizeUri, clientId, clientIdGitHub, redirectUri } from '../../helpers/config';
+import { authorizeUri, clientId, clientIdGitHub, redirectUri, cookiePolicy } from '../../helpers/config';
 
 const Login = () => {
    //Extraer los valores del context
@@ -99,6 +99,7 @@ const Login = () => {
       clientId,
       isSignedIn: false, //mantiene la sesión iniciada
       accessType: 'offline',
+      cookiePolicy,
    });
 
    return (

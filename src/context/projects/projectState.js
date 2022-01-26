@@ -79,7 +79,13 @@ const ProyectoState = ({ children }) => {
    };
 
    // Eliminar un proyecto
-   const eliminarProyecto = (proyectoId) => {
+   const eliminarProyecto = async (proyectoId) => {
+      const resp = await fetchConToken(`proyectos/${proyectoId}`, {}, 'DELETE');
+
+      const body = await resp.json();
+
+      console.log(body);
+
       dispatch({
          type: ELIMINAR_PROYECTO,
          payload: proyectoId,

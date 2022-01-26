@@ -28,29 +28,19 @@ Crear un archivo **.env** para las variables de entorno
 Variables de entorno necesarias para la app:
 
 ```
-
+// URL API BackEnd
 REACT_APP_API_URL=
 
+// Credenciales Google Oauth para el login
 REACT_APP_CLIENT_ID_GOOGLE=
 
+// Credenciales GitHub Oauth para el login
 REACT_APP_GITHUB_CLIENT_ID=
 REACT_APP_GITHUB_CLIENT_SECRET=
 REACT_APP_GITHUB_AUTORIZE_URI=
 REACT_APP_GITHUB_REDIRECT_URI=
 
 ```
-
--  **REACT_APP_API_URL=http://localhost:4000/api** URL de la API creada en el BackEnd
-
--  **REACT_APP_CLIENT_ID_GOOGLE** Client ID de Google para el login
-
--  **REACT_APP_GITHUB_CLIENT_ID** Client ID de GitHub para el login
-
--  **REACT_APP_GITHUB_CLIENT_SECRET** Client Secret de GitHub para el login
-
--  **REACT_APP_GITHUB_AUTORIZE_URI** URL para autorizar login con GitHub, parte del BackEnd
-
--  **REACT_APP_GITHUB_REDIRECT_URI** URL para redireccionar login con GitHub, parte del FrontEnd
 
 ## BackEnd
 

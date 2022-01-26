@@ -158,6 +158,10 @@ const AuthState = ({ children }) => {
       });
    };
 
+   // TODO:Cerrar sesión Google
+
+   // TODO:Cerrar sesión GitHub
+
    return (
       <authContext.Provider
          //
